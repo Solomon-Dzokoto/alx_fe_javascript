@@ -8,18 +8,30 @@ const quotes = [
   ];
   const quoteDisplay = document.getElementById("quoteDisplay")
   const btn = document.getElementById("newQuote")
+  const btn1 = document.getElementById("newQuote")
+  
 
   console.log( Math.floor(Math.random()*quotes.length))
 
   function showRandomQuote(){
    const index = Math.floor(Math.random()*quotes.length)
    const object = quotes[index]
-   const p = document.createElement("p")
-   const small = document.createElement("small")
-   p.textContent = object.text 
-   small.textContent = object.category
-   quoteDisplay.appendChild(p)
-   quoteDisplay.appendChild(small)
+   quoteDisplay.textContent = ` ${object.text} ${object.category}`
+  }
+
+  function createAddQuoteForm(){
+    const newQuoteCategory = document.getElementById("newQuoteCategory").value.trim()
+    const newQuoteText= document.getElementById("newQuoteText").value.trim()
+   if(newQuoteCategory && newQuoteText){
+    quotes.push({text:newQuoteText,category:newQuoteCategory})
+    console.log(quotes)
+    document.getElementById("newQuoteCategory")= ""
+    document.getElementById("newQuoteText")= ""
+  }else{
+    alert("Please provide all details")
+  }
+
   }
 
   btn.addEventListener("click",showRandomQuote)
+  btn1.addEventListener("click",createAddQuoteForm)
