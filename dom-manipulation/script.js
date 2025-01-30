@@ -125,6 +125,52 @@ const quotes = [
     filterQuotes();
       setInterval(fetchQuotesFromServer, 60000); 
   }
+
+async function syncQuotes() {
+    try{
+       response = await fetch("https://jsonplaceholder.typicode.com/posts")
+       serveQuotes =  response.json()
+      // Simulate server quotes (mock data)
+      const simulatedServerQuotes = serverQuotes.slice(0, 5).map((post) => ({
+        text: post.title,
+        category: "Server",
+      }));
+                    
+      // Merge local and server quotes
+      const mergedQuotes = mergeQuotes(quotes, simulatedServerQuotes);
+
+      // Update local quotes and save to local storage
+      quotes = mergedQuotes;
+      saveQuotes();
+
+      // Notify the user
+      alert("Quotes synced with server successfully!");
+      console.log("Synced quotes:", quotes);
+    })}catch(error){
+      console.error("Error syncing quotes:", error);
+      alert("Failed to sync quotes with server.");
+    });
+}
+
+function mergeQuotes(localQuotes, serverQuotes) {
+  const mergedQuotes = [...localQuotes];
+
+  serverQuotes.forEach((serverQuote) => {
+    const existingQuote = localQuotes.find(
+      (localQuote) => localQuote.text === serverQuote.text
+    );
+
+    if (!existingQuote) {
+      // Add new quote from server
+      mergedQuotes.push(serverQuote);
+    } else {
+      // Overwrite local quote with server quote (conflict resolution)
+      Object.assign(existingQuote, serverQuote);
+    }
+  });
+
+  return mergedQuotes;
+}
 fetchQuotesFromServer()
 
 
