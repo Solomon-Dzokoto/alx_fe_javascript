@@ -18,13 +18,13 @@ const quotes = [
    quoteDisplay.textContent = ` ${object.text} ${object.category}`
   }
 
-  function addQuote() {
+  function createAddForm() {
     const newQuoteText = document.getElementById("newQuoteText").value;
     const newQuoteCategory = document.getElementById("newQuoteCategory").value;
   
     if (newQuoteText && newQuoteCategory) {
       quotes.push({ text: newQuoteText, category: newQuoteCategory });
-      saveQuotes(); // Save to local storage
+      saveQuotes(); 
       document.getElementById("newQuoteText").value = "";
       document.getElementById("newQuoteCategory").value = "";
       alert("Quote added successfully!");
