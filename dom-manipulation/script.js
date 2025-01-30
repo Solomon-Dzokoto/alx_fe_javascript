@@ -18,15 +18,16 @@ const quotes = [
    quoteDisplay.textContent = ` ${object.text} ${object.category}`
   }
 
-  function createAddForm() {
+  function addQuote() {
     const newQuoteText = document.getElementById("newQuoteText").value;
     const newQuoteCategory = document.getElementById("newQuoteCategory").value;
   
-    if (newQuoteText && newQuoteCategory) {
+    if ( newQuoteText && newQuoteCategory) {
       quotes.push({ text: newQuoteText, category: newQuoteCategory });
       saveQuotes(); 
       document.getElementById("newQuoteText").value = "";
       document.getElementById("newQuoteCategory").value = "";
+        createAddQuoteForm()
       alert("Quote added successfully!");
     } else {
       alert("Please fill in both fields.");
