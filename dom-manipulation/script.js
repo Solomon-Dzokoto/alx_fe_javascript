@@ -77,10 +77,13 @@ const quotes = [
   function populateCategories() {
     const categories = [...new Set(quotes.map(quote => quote.category))];
     const filter = document.getElementById("categoryFilter");
-    filter.innerHTML = '<option value="all">All Categories</option>';
+      const li = document.createElement("li")
+      li.innerHTML='<option value="all">All Categories</option>'
+ 
     categories.forEach(category => {
-      filter.innerHTML += `<option value="${category}">${category}</option>`;
+      li.innerHTML += `<option value="${category}">${category}</option>`;
     });
+      filter.appendChild(li)
   }
 
   function filterQuotes() {
