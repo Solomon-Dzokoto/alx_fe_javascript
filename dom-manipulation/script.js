@@ -15,7 +15,9 @@ const quotes = [
     const quoteDisplay = document.getElementById("quoteDisplay")
    const index = Math.floor(Math.random()*quotes.length)
    const object = quotes[index]
-   quoteDisplay.textContent = ` ${object.text} ${object.category}`
+   const li = document.createElement("li")
+    li.append(` ${object.text} ${object.category}`)  
+   quoteDisplay.appendChild(li)
   }
 
   function addQuote() {
