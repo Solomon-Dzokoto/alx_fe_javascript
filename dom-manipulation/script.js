@@ -144,7 +144,7 @@ async function syncQuotes() {
       saveQuotes();
 
       // Notify the user
-      alert("Quotes synced with server successfully!");
+      alert("Quotes synced with server!");
       console.log("Synced quotes:", quotes);
     })}catch(error){
       console.error("Error syncing quotes:", error);
