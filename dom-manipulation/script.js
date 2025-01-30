@@ -82,6 +82,7 @@ const quotes = [
  
     categories.forEach(category => {
       li.innerHTML += `<option value="${category}">${category}</option>`;
+        li.textContent = ${category}
     });
       filter.appendChild(li)
   }
