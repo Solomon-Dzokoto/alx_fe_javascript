@@ -112,13 +112,20 @@ const quotes = [
   populateCategories();
 
   async function fetchQuotesFromServer() {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts",{
+    method : "POST",
+    headers: {Content-Type : "application/json"},
+    body : JSON.stringify(quotes)    
+    });
     const serverQuotes = await response.json();
+      console.log(serverQuotes)
     quotes = serverQuotes.map(post => ({ text: post.title, category: "Server" }));
     saveQuotes();
     populateCategories();
     filterQuotes();
+      setInterval(fetchQuotesFromServer, 60000); 
   }
+fetchQuotesFromServer()
 
-setInterval(fetchQuotesFromServer, 60000); 
+
 
